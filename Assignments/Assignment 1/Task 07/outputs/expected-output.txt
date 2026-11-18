@@ -1,0 +1,3 @@
+Car07[TN02B2]
+fee=90.0
+equals=true, sameHash=true
