@@ -1,0 +1,6 @@
+floors=5, capacities=[10, 12, 8, 15, 9]
+E-bike flat fee=Rs 25.0
+Delivery van off-peak=Rs 60.0
+Delivery van peak=Rs 120.0
+Car=Rs 60.0
+Decision: MODIFY using jagged capacity array and separate pricing strategies.
