@@ -1,0 +1,11 @@
+Execution environment: OpenJDK 21.0.12.1
+Command: javac CollectionRedesign.java && java CollectionRedesign
+
+n=1000 average lookup ns: list scan=44795.9, hash index=466.2
+Design trade-off: HashMap adds O(n) index storage but changes expected lookup from O(n) to O(1).
+n=10000 average lookup ns: list scan=37601.5, hash index=259.3
+Design trade-off: HashMap adds O(n) index storage but changes expected lookup from O(n) to O(1).
+n=100000 average lookup ns: list scan=834841.9, hash index=1234.1
+Design trade-off: HashMap adds O(n) index storage but changes expected lookup from O(n) to O(1).
+
+Averaged over 1,000 measured lookups per structure and size; one process run.
