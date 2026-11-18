@@ -1,0 +1,4 @@
+Ticket#101 TN01AA1111 @(0,4)
+Ticket#102 TN02BB2222 @(-1,-1)
+Ticket#103 TN03CC3333 @(1,2)
+Constructor chaining initializes fields immediately.
