@@ -1,0 +1,5 @@
+entered TN01AA1111 at 0:0
+fee at 60 min=Rs 30.0
+last free slot=true, full facility=true
+duplicate rejected
+unknown vehicle rejected
