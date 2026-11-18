@@ -1,1 +1,53 @@
-interface Chargeable08 {double chargingFee(int kWh);} abstract class Vehicle08 {final String reg;Vehicle08(String r){reg=r;}abstract double rate();double calculateFee(int m){return ((m+59)/60)*rate();}String getRegNo(){return reg;}} class TwoWheeler08 extends Vehicle08 {TwoWheeler08(String r){super(r);}double rate(){return 10;}} class Car08 extends Vehicle08 {Car08(String r){super(r);}double rate(){return 30;}} class ElectricCar08 extends Vehicle08 implements Chargeable08 {ElectricCar08(String r){super(r);}double rate(){return 60;}public double chargingFee(int k){return k*3;}} public class Task08Demo {static int add(int a,int b){return a+b;}static double add(double a,double b){return a+b;}public static void main(String[]x){Vehicle08[]v={new TwoWheeler08("TN01A1"),new Car08("TN02B2"),new ElectricCar08("TN03C3")};for(Vehicle08 q:v){double f=q.calculateFee(130);if(q instanceof Chargeable08 c)f+=c.chargingFee(10);System.out.println(q.getClass().getSimpleName().replace("08","")+" "+q.getRegNo()+" -> Rs "+f);}System.out.println("overload int="+add(2,3)+", double="+add(2.5,3.5));System.out.println(new Car08("TN02B2").getRegNo().equals(new ElectricCar08("TN02B2").getRegNo()));}}
+interface Chargeable {
+    double chargingFee(int kWh);
+}
+abstract class Vehicle {
+    private final String regNo;
+    protected Vehicle(String regNo) {
+        if (regNo == null || regNo.isBlank()) throw new IllegalArgumentException("Registration required");
+        this.regNo = regNo;
+    }
+    public String getRegNo() { return regNo; }
+    protected abstract double ratePerHour();
+    public double calculateFee(int minutes) {
+        if (minutes < 0) throw new IllegalArgumentException("Minutes cannot be negative");
+        int hours = (minutes + 59) / 60;
+        return hours * ratePerHour();
+    }
+    @Override public boolean equals(Object o) {
+        return o instanceof Vehicle && regNo.equals(((Vehicle) o).regNo);
+    }
+    @Override public int hashCode() { return regNo.hashCode(); }
+}
+class TwoWheeler extends Vehicle {
+    TwoWheeler(String regNo) { super(regNo); }
+    @Override protected double ratePerHour() { return 15.0; }
+}
+class Car extends Vehicle {
+    Car(String regNo) { super(regNo); }
+    @Override protected double ratePerHour() { return 45.0; }
+}
+class ElectricCar extends Vehicle implements Chargeable {
+    ElectricCar(String regNo) { super(regNo); }
+    @Override protected double ratePerHour() { return 90.0; }
+    @Override public double chargingFee(int kWh) {
+        if (kWh < 0) throw new IllegalArgumentException("Energy cannot be negative");
+        return kWh * 3.0;
+    }
+}
+public class Task08Demo {
+    public static void main(String[] args) {
+        Vehicle[] vehicles = {
+            new TwoWheeler("TN01A1"),
+            new Car("TN02B2"),
+            new ElectricCar("TN03C3")
+        };
+        for (Vehicle v : vehicles) {
+            double fee = v.calculateFee(130);
+            if (v instanceof Chargeable c) fee += c.chargingFee(10);
+            System.out.println(v.getClass().getSimpleName() + " " + v.getRegNo()
+                    + " -> Rs " + fee);
+        }
+        System.out.println(new Car("TN02B2").equals(new ElectricCar("TN02B2")));
+    }
+}
