@@ -1,0 +1,5 @@
+import java.util.*;
+class Medicine {final String code,name;int stock;Medicine(String c,String n,int s){code=c;name=n;stock=s;}public String toString(){return code+" "+name+" stock="+stock;}}
+public class PharmacyInventory {
+ public static void main(String[]x){for(int n:new int[]{1000,10000,50000}){Map<String,Medicine> hash=new HashMap<>(),tree=new TreeMap<>();Map<String,Medicine> ordered=new LinkedHashMap<>();for(int i=0;i<n;i++){String code=String.format("MED%06d",i);Medicine m=new Medicine(code,"Medicine"+i,i%200);hash.put(code,m);tree.put(code,m);ordered.put(code,m);}String key=String.format("MED%06d",n/2);long s=System.nanoTime();for(int i=0;i<100000;i++)hash.get(key);long hashTime=System.nanoTime()-s;s=System.nanoTime();for(int i=0;i<100000;i++)tree.get(key);long treeTime=System.nanoTime()-s;s=System.nanoTime();for(int i=0;i<100000;i++)ordered.get(key);long linkedTime=System.nanoTime()-s;System.out.printf("n=%d lookups/100k(ns): HashMap=%d TreeMap=%d LinkedHashMap=%d%n",n,hashTime,treeTime,linkedTime);System.out.println("Sorted first="+tree.values().iterator().next());System.out.println("Insertion-order first="+ordered.values().iterator().next());}}
+}
