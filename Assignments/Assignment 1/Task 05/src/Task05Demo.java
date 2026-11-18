@@ -1,1 +1,53 @@
-class Ticket05 {static int next=1,active=0;final int id;Ticket05(){id=next++;active++;}void close(){active--; }static int activeCount(){return active;}} public class Task05Demo {static{System.out.println("Parking ticket system initialized");}static Ticket05 create(){return new Ticket05();}static void show(Ticket05 t){System.out.println("Ticket passed to method: "+t.id);}public static void main(String[]x){Ticket05 t=create();show(t);System.out.println("active="+Ticket05.activeCount()+", next="+Ticket05.next);t.close();t=null;System.out.println("active after exit="+Ticket05.activeCount());System.out.println("Ticket object is eligible for GC when no references remain.");}}
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+final class ParkingTicket05 {
+    private static int nextNumber = 5001;
+    private static int activeCount = 0;
+    private final int ticketNumber;
+    private final String registrationNumber;
+    private boolean active;
+
+    static {
+        System.out.println("Parking ticket service initialized");
+    }
+    ParkingTicket05(String registration) {
+        if (registration == null || registration.isBlank()) throw new IllegalArgumentException("Registration required");
+        ticketNumber = nextNumber++;
+        registrationNumber = registration;
+        active = true;
+        activeCount++;
+    }
+    int getTicketNumber() { return ticketNumber; }
+    String getRegistrationNumber() { return registrationNumber; }
+    void close() {
+        if (active) { active = false; activeCount--; }
+    }
+    static int getActiveCount() { return activeCount; }
+    static int getNextNumber() { return nextNumber; }
+}
+public class Task05Demo {
+    private static ParkingTicket05 createTicket(String reg) { return new ParkingTicket05(reg); }
+    private static void printTicket(ParkingTicket05 ticket) {
+        System.out.println("Ticket passed to method: " + ticket.getTicketNumber()
+                + " / " + ticket.getRegistrationNumber());
+    }
+    public static void main(String[] args) {
+        List<ParkingTicket05> tickets = new ArrayList<>();
+        ParkingTicket05 first = createTicket("TN01AA1111");
+        ParkingTicket05 second = createTicket("TN02BB2222");
+        tickets.add(first); tickets.add(second);
+        printTicket(first);
+        System.out.println("Active tickets: " + ParkingTicket05.getActiveCount());
+        first.close();
+        tickets.remove(first);
+        first = null;
+        System.out.println("After first vehicle exits, active tickets: " + ParkingTicket05.getActiveCount());
+        System.out.println("Next ticket number: " + ParkingTicket05.getNextNumber());
+        System.out.println("The first ticket becomes eligible for GC only when no reachable references remain.");
+        second.close();
+        tickets.clear();
+        System.out.println("Final active tickets: " + ParkingTicket05.getActiveCount());
+    }
+}
