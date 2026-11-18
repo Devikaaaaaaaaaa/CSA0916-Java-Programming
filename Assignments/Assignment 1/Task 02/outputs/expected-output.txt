@@ -1,0 +1,5 @@
+vehicle=TN02CD5678, slot=2
+jagged floors=2, floor0 slots=2
+integer division fee=0.00
+correct decimal fee=15.00
+types: slot=int, entryTime=long, duration=int, fee=double
