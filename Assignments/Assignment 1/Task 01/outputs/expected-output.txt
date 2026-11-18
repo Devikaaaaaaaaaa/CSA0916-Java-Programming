@@ -1,0 +1,4 @@
+Vehicle: TN01AB1234 (CAR)
+Slot: floor 0, slot 1, occupied=true
+Ticket: 1, user=STUDENT, monthlyPass=true
+Rule: one vehicle per slot; ticket numbers are never reused.
