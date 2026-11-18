@@ -1,0 +1,6 @@
+import java.util.*;
+class Vehicle01 { String regNo,type; long entryTime; Vehicle01(String r,String t,long e){regNo=r;type=t;entryTime=e;} }
+class Slot01 { int floor,number; Vehicle01 vehicle; Slot01(int f,int n){floor=f;number=n;} boolean free(){return vehicle==null;} }
+class Ticket01 { static int next=1; int id=next++; Vehicle01 vehicle; Slot01 slot; Ticket01(Vehicle01 v,Slot01 s){vehicle=v;slot=s;} }
+class User01 { String category; boolean monthlyPass; User01(String c,boolean p){category=c;monthlyPass=p;} }
+public class Task01Demo { public static void main(String[]x){Vehicle01 v=new Vehicle01("TN01AB1234","CAR",1000);Slot01 s=new Slot01(0,1);s.vehicle=v;Ticket01 t=new Ticket01(v,s);User01 u=new User01("STUDENT",true);System.out.println("Vehicle: "+v.regNo+" ("+v.type+")");System.out.println("Slot: floor "+s.floor+", slot "+s.number+", occupied="+!s.free());System.out.println("Ticket: "+t.id+", user="+u.category+", monthlyPass="+u.monthlyPass);System.out.println("Rule: one vehicle per slot; ticket numbers are never reused.");} }
