@@ -1,0 +1,6 @@
+import java.util.*;
+class PlaylistCollectionsBenchmark {
+ static long time(Runnable r){long s=System.nanoTime();r.run();return System.nanoTime()-s;}
+ static void run(int n){List<Integer> a=new ArrayList<>(),l=new LinkedList<>();for(int i=0;i<n;i++){a.add(i);l.add(i);}int mid=n/2;long aa=time(()->{for(int i=0;i<2000;i++)a.add(a.size(),i);});long la=time(()->{for(int i=0;i<2000;i++)l.add(l.size(),i);});long ai=time(()->{for(int i=0;i<500;i++)a.add(0,i);});long li=time(()->{for(int i=0;i<500;i++)l.add(0,i);});long ag=time(()->{long x=0;for(int i=0;i<10000;i++)x+=a.get(i%a.size());});long lg=time(()->{long x=0;for(int v:l)x+=v;});System.out.printf("n=%d endAdd(ns) ArrayList=%d LinkedList=%d%n",n,aa,la);System.out.printf("frontInsert(ns) ArrayList=%d LinkedList=%d%n",ai,li);System.out.printf("randomGet/iteration(ns) ArrayList=%d LinkedList=%d%n",ag,lg);}
+ public static void main(String[]x){for(int n:new int[]{1000,10000,50000})run(n);Deque<String> upNext=new ArrayDeque<>();upNext.addFirst("urgent");upNext.addLast("normal");System.out.println("Up next remove="+upNext.removeFirst()+", remaining="+upNext);}
+}
