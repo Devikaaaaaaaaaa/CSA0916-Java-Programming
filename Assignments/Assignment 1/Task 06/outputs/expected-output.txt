@@ -1,0 +1,4 @@
+Vehicle constructor: TN03C3
+Car constructor
+ElectricCar constructor
+rate=30.0
