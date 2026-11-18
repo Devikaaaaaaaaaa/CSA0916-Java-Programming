@@ -1,0 +1,3 @@
+vehicle=TN03C3, rate=60.0
+charging supported, fee=30.0
+valid energy 10=true
