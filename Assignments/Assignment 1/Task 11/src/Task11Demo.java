@@ -1,1 +1,91 @@
-import java.util.*; class Vehicle11 {final String reg,type;Vehicle11(String r,String t){reg=r;type=t;}} class Ticket11 {final Vehicle11 v;final int f,s;final long entry;Ticket11(Vehicle11 v,int f,int s,long e){this.v=v;this.f=f;this.s=s;entry=e;}} class ParkingSystem11 {final String[][] slots;final Map<String,Ticket11> active=new HashMap<>();ParkingSystem11(int[]c){slots=new String[c.length][];for(int i=0;i<c.length;i++)slots[i]=new String[c[i]];}Ticket11 enter(String r,String t,long now){if(active.containsKey(r))throw new IllegalArgumentException("duplicate registration");for(int f=0;f<slots.length;f++)for(int s=0;s<slots[f].length;s++)if(slots[f][s]==null){slots[f][s]=r;Ticket11 q=new Ticket11(new Vehicle11(r,t),f,s,now);active.put(r,q);return q;}return null;}double exit(String r,long now){Ticket11 q=active.remove(r);if(q==null)throw new IllegalArgumentException("unknown vehicle");slots[q.f][q.s]=null;long m=Math.max(0,(now-q.entry)/60000);double rate=q.v.type.equals("CAR")?30:10;return ((m+59)/60)*rate;}} public class Task11Demo {public static void main(String[]x){ParkingSystem11 p=new ParkingSystem11(new int[]{1,1});Ticket11 a=p.enter("TN01AA1111","CAR",0);System.out.println("entered "+a.v.reg+" at "+a.f+":"+a.s);System.out.println("fee at 60 min=Rs "+p.exit(a.v.reg,3600000));Ticket11 b=p.enter("TN02BB2222","BIKE",0);Ticket11 c=p.enter("TN03CC3333","CAR",0);System.out.println("last free slot="+(b!=null)+", full facility="+(c==null));try{p.enter("TN02BB2222","BIKE",1);}catch(Exception e){System.out.println("duplicate rejected");}try{p.exit("UNKNOWN",1);}catch(Exception e){System.out.println("unknown vehicle rejected");}}}
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+enum VehicleKind11 { TWO_WHEELER, CAR, ELECTRIC_CAR }
+final class Vehicle11 {
+    private final String registration;
+    private final VehicleKind11 kind;
+    Vehicle11(String registration, VehicleKind11 kind) {
+        if (registration == null || registration.isBlank()) throw new IllegalArgumentException("Registration required");
+        this.registration = registration.trim().toUpperCase();
+        this.kind = kind;
+    }
+    String getRegistration() { return registration; }
+    VehicleKind11 getKind() { return kind; }
+}
+final class ParkingTicket11 {
+    private static int nextNumber = 10001;
+    private final int ticketNumber = nextNumber++;
+    private final Vehicle11 vehicle;
+    private final int floor, slot;
+    private final LocalDateTime entryTime;
+    ParkingTicket11(Vehicle11 v, int f, int s, LocalDateTime time) {
+        vehicle = v; floor = f; slot = s; entryTime = time;
+    }
+    int getTicketNumber() { return ticketNumber; }
+    Vehicle11 getVehicle() { return vehicle; }
+}
+final class ParkingSystem11 {
+    private final String[][] slots;
+    private final Map<String, ParkingTicket11> active = new HashMap<>();
+    ParkingSystem11(int[] capacities) {
+        slots = new String[capacities.length][];
+        for (int i = 0; i < capacities.length; i++) {
+            if (capacities[i] < 0) throw new IllegalArgumentException("Negative capacity");
+            slots[i] = new String[capacities[i]];
+        }
+    }
+    ParkingTicket11 enter(String registration, VehicleKind11 kind, LocalDateTime time) {
+        String key = registration.trim().toUpperCase();
+        if (active.containsKey(key)) throw new IllegalArgumentException("Duplicate registration");
+        for (int f = 0; f < slots.length; f++)
+            for (int s = 0; s < slots[f].length; s++)
+                if (slots[f][s] == null) {
+                    Vehicle11 v = new Vehicle11(key, kind);
+                    ParkingTicket11 t = new ParkingTicket11(v, f, s, time);
+                    slots[f][s] = key;
+                    active.put(key, t);
+                    return t;
+                }
+        return null;
+    }
+    double exit(String registration, LocalDateTime exitTime, boolean validMonthlyPass) {
+        String key = registration.trim().toUpperCase();
+        ParkingTicket11 t = active.get(key);
+        if (t == null) throw new IllegalArgumentException("No active ticket");
+        active.remove(key);
+        slots[t.floor][t.slot] = null;
+        if (validMonthlyPass) return 0.0;
+        long minutes = Math.max(0, Duration.between(t.entryTime, exitTime).toMinutes());
+        int hours = (int) ((minutes + 59) / 60);
+        double rate = switch (t.vehicle.getKind()) {
+            case TWO_WHEELER -> 15.0;
+            case CAR -> 45.0;
+            case ELECTRIC_CAR -> 90.0;
+        };
+        return hours * rate;
+    }
+    boolean isValidSlot(int floor, int slot) {
+        return floor >= 0 && floor < slots.length && slot >= 0 && slot < slots[floor].length;
+    }
+}
+public class Task11Demo {
+    public static void main(String[] args) {
+        ParkingSystem11 system = new ParkingSystem11(new int[] { 1, 1 });
+        LocalDateTime start = LocalDateTime.of(2026, 11, 18, 9, 0);
+        ParkingTicket11 first = system.enter("TN01AA1111", VehicleKind11.CAR, start);
+        System.out.println("Entry ticket: " + first.getTicketNumber() + ", vehicle=" + first.getVehicle().getRegistration());
+        System.out.println("60-minute car fee: Rs " + system.exit("TN01AA1111", start.plusMinutes(60), false));
+        ParkingTicket11 last = system.enter("TN02BB2222", VehicleKind11.TWO_WHEELER, start);
+        System.out.println("Last free slot allocated: " + (last != null));
+        System.out.println("Full facility rejects next vehicle: " + (system.enter("TN03CC3333", VehicleKind11.CAR, start) == null));
+        try { system.enter("TN02BB2222", VehicleKind11.TWO_WHEELER, start); }
+        catch (IllegalArgumentException ex) { System.out.println("Duplicate registration rejected"); }
+        try { system.exit("UNKNOWN", start.plusMinutes(1), false); }
+        catch (IllegalArgumentException ex) { System.out.println("Unknown vehicle exit rejected"); }
+        System.out.println("Invalid slot number rejected: " + !system.isValidSlot(0, 99));
+        System.out.println("Valid monthly pass fee: Rs " + system.exit("TN02BB2222", start, true));
+    }
+}
