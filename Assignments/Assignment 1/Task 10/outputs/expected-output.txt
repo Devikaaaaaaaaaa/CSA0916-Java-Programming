@@ -1,0 +1,3 @@
+TN01AB1234 slot=4
+invalid update rejected
+Integer equals=true; use equals, not ==, for values.
