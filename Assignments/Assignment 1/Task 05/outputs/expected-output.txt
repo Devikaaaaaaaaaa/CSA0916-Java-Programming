@@ -1,0 +1,5 @@
+Parking ticket system initialized
+Ticket passed to method: 1
+active=1, next=2
+active after exit=0
+Ticket object is eligible for GC when no references remain.
