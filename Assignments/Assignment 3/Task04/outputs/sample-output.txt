@@ -1,0 +1,13 @@
+SAMPLE OUTPUT (thread interleaving is not fixed)
+Station-1 scanned script 1
+Station-2 scanned script 1
+Station-3 scanned script 1
+Station-4 scanned script 1
+...
+All scanner stations completed.
+Thread-0 alive: false
+Thread-1 alive: false
+Thread-2 alive: false
+Thread-3 alive: false
+
+The exact line order may differ between runs.
