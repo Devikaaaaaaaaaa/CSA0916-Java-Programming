@@ -1,0 +1,9 @@
+Sample valid run:
+Student ID: STU102
+Fee amount: 25000
+Payment accepted for STU102. Amount: Rs. 25000.00
+
+Sample invalid run:
+Student ID: STU102
+Fee amount: abc
+Payment failed: Enter a numeric amount.
