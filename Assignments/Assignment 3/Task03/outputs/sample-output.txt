@@ -1,0 +1,5 @@
+Manual and try-with-resources results match: true
+Records processed: 3
+Report written to sales-report.txt
+
+The program creates data/store-a.txt, data/store-b.txt and sales-report.txt in its working directory.
