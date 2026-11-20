@@ -1,0 +1,4 @@
+Execution requires MySQL and Connector/J configuration. Expected scenarios:
+1. Valid registration: Registration successful.
+2. Invalid student ID: Enter a valid student ID.
+3. Duplicate student/event: database unique constraint rejects the second insert and UI reports registration failure.
