@@ -1,1 +1,17 @@
-Migration execution requires a configured MySQL database and a source bus-pass file. Record total input rows, accepted rows, rejected rows with reasons, inserted rows, database product/driver version, and measured batch timings after running locally.
+TASK 6 – MIGRATION AND DATABASE METADATA TEST RECORD
+The uploaded task contains the migration workflow and final engineering decision; it does not include a runnable migration Java class.
+
+Record these values after implementation and execution:
+- Input pass records:
+- Accepted records:
+- Rejected records:
+- Rows inserted:
+- Rejection reasons / line numbers:
+- Database product and version:
+- JDBC driver and version:
+- Batch size:
+- Total migration time (ms):
+
+Expected validation: accepted + rejected = input records; inserted = accepted records after a successful commit. On batch failure, rollback and verify that no partial import remains.
+
+Status: No database migration was executed; do not report estimated timings as measured results.
