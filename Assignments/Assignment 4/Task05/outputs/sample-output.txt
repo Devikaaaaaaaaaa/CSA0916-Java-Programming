@@ -1,0 +1,6 @@
+Sample valid conversion (illustrative fixed rate):
+10 USD to INR = 830.00 INR
+
+Sample invalid input:
+abc
+Expected message: Please enter a valid non-negative number.
