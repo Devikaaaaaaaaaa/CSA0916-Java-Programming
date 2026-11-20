@@ -1,1 +1,11 @@
-WalletTransfer.transfer(Connection, fromId, toId, 500) commits both balance changes together or rolls back on failure. safeLogin uses PreparedStatement. Run against a local test database and capture success, insufficient-funds and forced-failure tests.
+TASK 5 – WALLET TRANSACTION TEST CASES
+The uploaded WalletTransfer.java compiles as a JDBC utility; it needs a configured database connection and wallet/app_user tables.
+
+Test cases to run:
+1. Transfer 500 from a wallet with sufficient funds -> debit and credit both commit.
+2. Transfer more than available balance -> debit affects 0 rows; transaction rolls back.
+3. Use a nonexistent destination wallet -> credit affects 0 rows; source debit rolls back.
+4. Login with valid bound credentials -> matching row is returned.
+5. Login text containing SQL syntax -> treated as a parameter value, not executable SQL.
+
+Status: JDBC database execution has not been performed here. These are expected test outcomes from the transaction and PreparedStatement logic, not captured terminal results.
