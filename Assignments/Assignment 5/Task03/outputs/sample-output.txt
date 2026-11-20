@@ -1,0 +1,1 @@
+No JDBC output is available until MySQL and Connector/J are configured and the schema is created. StudentDao supports insert, findById, findAll, update and delete. Run your own CRUD tests and save terminal screenshots here.
