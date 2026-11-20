@@ -1,1 +1,16 @@
-For a 50 MiB file: 52,428,800 bytes are processed. The program reports unbuffered and buffered elapsed times and line counts for the file you provide. Timings depend on the machine, storage and OS cache; no fixed benchmark is asserted here.
+ACTUAL JAVA RUN (JDK 21)
+Test input file: test.txt
+Contents:
+first
+second
+third
+
+Command:
+javac BufferedLineCounter.java
+java BufferedLineCounter test.txt
+
+Console output from one local run:
+Unbuffered lines=3 time=3.086 ms
+Buffered lines=3 time=0.306 ms
+
+Both approaches counted 3 lines. Timings are environment-dependent and are included as one sample run only; rerun on the target machine for report measurements.
