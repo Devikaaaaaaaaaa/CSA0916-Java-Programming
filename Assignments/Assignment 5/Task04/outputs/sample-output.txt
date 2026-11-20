@@ -1,0 +1,4 @@
+Sample run:
+North Hostel / Mira / password restored? false
+
+The password field is transient and is not restored from the serialized object. Run locally to create hostel.ser and capture the actual terminal output.
