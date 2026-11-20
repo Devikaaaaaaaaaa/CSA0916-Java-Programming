@@ -1,0 +1,1 @@
+public record Student(int studentId,String registerNo,String fullName,String email) {}
