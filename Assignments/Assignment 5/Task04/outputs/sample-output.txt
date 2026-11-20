@@ -1,4 +1,13 @@
-Sample run:
+ACTUAL JAVA RUN (JDK 21)
+Command:
+javac SerializationModel.java
+java SerializationModel
+
+Console output:
 North Hostel / Mira / password restored? false
 
-The password field is transient and is not restored from the serialized object. Run locally to create hostel.ser and capture the actual terminal output.
+Result:
+- The Hostel -> Room -> Resident object graph was serialized and read back.
+- The resident name was restored.
+- The password field was not restored because it is declared transient.
+- The program created hostel.ser in its working directory.
