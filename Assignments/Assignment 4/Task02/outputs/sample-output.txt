@@ -1,0 +1,5 @@
+Launch the Swing program to interact with the appointment desk. Sample action:
+Department: Cardiology
+Doctor: Dr. Rao
+Patient name: Ananya
+Status: Appointment request recorded for Ananya with Dr. Rao
