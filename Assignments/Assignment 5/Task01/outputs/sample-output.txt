@@ -1,0 +1,5 @@
+Sample run (example record):
+Find P1003: Pass[id=P1003, registerNo=STU1003, name=Kavya, route=12, stop=Main Gate, validUntil=2027-03-31, amount=1250.0]
+Find damaged P1002: null
+
+These are illustrative outputs; run the program to generate your actual output.
