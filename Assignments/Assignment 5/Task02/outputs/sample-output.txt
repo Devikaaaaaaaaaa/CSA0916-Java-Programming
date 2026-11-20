@@ -1,0 +1,1 @@
+For a 50 MiB file: 52,428,800 bytes are processed. The program reports unbuffered and buffered elapsed times and line counts for the file you provide. Timings depend on the machine, storage and OS cache; no fixed benchmark is asserted here.
