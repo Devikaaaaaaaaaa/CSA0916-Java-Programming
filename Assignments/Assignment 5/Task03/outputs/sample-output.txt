@@ -1,1 +1,12 @@
-No JDBC output is available until MySQL and Connector/J are configured and the schema is created. StudentDao supports insert, findById, findAll, update and delete. Run your own CRUD tests and save terminal screenshots here.
+TASK 3 – JDBC DAO TEST OUTPUT TEMPLATE
+Prerequisites: execute schema.sql in MySQL and add MySQL Connector/J to the classpath.
+
+Expected test sequence:
+1. INSERT Student(1001, 'STU1001', 'Asha Kumar', 'asha@example.com') -> 1 row inserted
+2. findById(1001) -> Student record returned
+3. findAll() -> list includes student 1001
+4. UPDATE email for student 1001 -> true
+5. DELETE student 1001 -> true
+6. findById(1001) after delete -> Optional.empty
+
+Status: Source code and schema are uploaded. These JDBC operations have not been run against a configured MySQL server in this environment. Run the tests locally and replace this template with your terminal output/screenshots.
