@@ -1,0 +1,17 @@
+SAMPLE RUN — valid withdrawal (create card-reader.cfg in the working directory first)
+Enter account number: 123456
+Enter withdrawal amount: 2000
+Withdrawal successful. Cash dispensed: Rs. 2000.00
+Remaining balance: Rs. 10000.00
+ATM session closed. Please take your card.
+
+SAMPLE RUN — invalid text input
+Enter account number: abc
+Input error: enter numeric values only.
+ATM session closed. Please take your card.
+
+SAMPLE RUN — missing card-reader configuration
+Enter account number: 123456
+Enter withdrawal amount: 2000
+Device error: Card-reader configuration file is missing.
+ATM session closed. Please take your card.
