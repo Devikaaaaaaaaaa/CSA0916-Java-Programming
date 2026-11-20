@@ -1,0 +1,1 @@
+Run DrawingPad, click the white drawing area three times. Expected label: Clicks: 3. Minimize and restore the window; all three dots should remain because the points are stored and repainted.
