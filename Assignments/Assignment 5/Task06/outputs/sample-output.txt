@@ -1,0 +1,1 @@
+Migration execution requires a configured MySQL database and a source bus-pass file. Record total input rows, accepted rows, rejected rows with reasons, inserted rows, database product/driver version, and measured batch timings after running locally.
