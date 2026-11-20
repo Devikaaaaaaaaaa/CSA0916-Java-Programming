@@ -1,0 +1,1 @@
+WalletTransfer.transfer(Connection, fromId, toId, 500) commits both balance changes together or rolls back on failure. safeLogin uses PreparedStatement. Run against a local test database and capture success, insufficient-funds and forced-failure tests.
