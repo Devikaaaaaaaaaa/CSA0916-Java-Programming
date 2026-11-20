@@ -1,0 +1,1 @@
+Run the Swing program at 420x300, 650x440 and 1000x700. The sample list shows three book entries after searching. Capture screenshots at all three sizes from your own execution.
