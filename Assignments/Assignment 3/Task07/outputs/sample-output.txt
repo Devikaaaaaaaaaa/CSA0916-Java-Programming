@@ -1,0 +1,12 @@
+SAMPLE OUTPUT — timing and task completion order vary
+Pool size: 1 | Success: 2 | Failure: 2 | Time: <measured> ms
+OK student-01.txt - S001 result: 85
+OK student-02.txt - S002 result: 92
+FAILED student-03.txt - NumberFormatException: For input string: "not-a-number"
+FAILED student-04.txt - NoSuchFileException: scores/student-04.txt
+
+Pool size: 2 | Success: 2 | Failure: 2 | Time: <measured> ms
+Pool size: 4 | Success: 2 | Failure: 2 | Time: <measured> ms
+Pool size: 8 | Success: 2 | Failure: 2 | Time: <measured> ms
+
+Replace <measured> with the actual timings from your own runs before submission.
