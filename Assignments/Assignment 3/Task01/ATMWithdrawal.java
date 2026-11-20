@@ -29,7 +29,7 @@ public class ATMWithdrawal {
             System.out.println("Input error: enter numeric values only.");
         } catch (IllegalArgumentException e) {
             System.out.println("Transaction rejected: " + e.getMessage());
-        } catch (IOException e) {
+        } catch (IOException | SecurityException e) {
             System.out.println("Device error: " + e.getMessage());
         } finally {
             System.out.println("ATM session closed. Please take your card.");
