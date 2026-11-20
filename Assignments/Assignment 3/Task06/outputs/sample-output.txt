@@ -1,0 +1,7 @@
+Produced 1 | counter size: 1
+Collected 1 | counter size: 0
+...
+Sum of tokens collected: 210 (expected 210)
+Wallet total after transfers: 1500
+
+Producer/consumer messages interleave; the total and wallet sum are the checks.
